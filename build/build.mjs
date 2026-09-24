@@ -18,6 +18,7 @@ import about from './pages/about.mjs';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, 'site');
 const PAGES = [home, dwVsLake, kimballInmon, dataMart, etlElt, starSchema, faq, glossary, about];
+const BASE_PATH = process.env.BASE_PATH || ''; // Ví dụ: '/repo-name' cho GitHub Pages project repo
 
 const NAV = [
   ['', 'DW là gì'],
@@ -409,21 +410,26 @@ const NOT_FOUND = (css) => `<!doctype html>
 <body><main class="wrap"><h1>Không tìm thấy trang</h1><p>Trang bạn tìm không tồn tại. Quay về <a href="/">trang chủ</a> hoặc xem <a href="/faq/">câu hỏi thường gặp</a>.</p></main></body></html>
 `;
 
+function applyBasePath(html) {
+  if (!BASE_PATH) return html;
+  return html.replace(/href="\/(?!\/)/g, `href="${BASE_PATH}/`).replace(/src="\/(?!\/)/g, `src="${BASE_PATH}/`);
+}
+
 async function main() {
   const css = (await readFile(join(ROOT, 'assets', 'style.css'), 'utf8')).replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').replace(/\s*([{}:;,>])\s*/g, '$1').trim();
   await rm(OUT, { recursive: true, force: true });
   for (const p of PAGES) {
     const dir = join(OUT, p.slug);
     await mkdir(dir, { recursive: true });
-    await writeFile(join(dir, 'index.html'), render(p, css));
+    await writeFile(join(dir, 'index.html'), applyBasePath(render(p, css)));
   }
-  await writeFile(join(OUT, '404.html'), NOT_FOUND(css));
+  await writeFile(join(OUT, '404.html'), applyBasePath(NOT_FOUND(css)));
   await writeFile(join(OUT, 'sitemap.xml'), sitemap());
   await writeFile(join(OUT, 'robots.txt'), robots());
   await writeFile(join(OUT, 'llms.txt'), llmsTxt());
   await cp(join(ROOT, 'assets', 'favicon.svg'), join(OUT, 'favicon.svg'));
   await cp(join(ROOT, 'assets', '_headers'), join(OUT, '_headers'));
-  console.log(`Đã build ${PAGES.length} trang vào ${OUT} (SITE_URL=${SITE.url}, AUTHOR=${AUTHOR.name})`);
+  console.log(`Đã build ${PAGES.length} trang vào ${OUT} (SITE_URL=${SITE.url}, AUTHOR=${AUTHOR.name}, BASE_PATH=${BASE_PATH})`);
 }
 
 main().catch((e) => {

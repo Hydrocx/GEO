@@ -49,11 +49,36 @@ Có thể sửa trực tiếp giá trị mặc định trong `build/config.mjs` 
 
 ## Deploy
 
-Site dùng đường dẫn gốc (`/...`), cần deploy ở **root domain**:
+### Cách deploy (theo thứ tự khuyến cáo):
 
-- **Netlify / Cloudflare Pages:** publish directory = `site`, build command = `npm run build` (đặt biến `SITE_URL`, `AUTHOR_NAME` trong phần Environment).
-- **Vercel:** Output directory = `site`.
-- **GitHub Pages:** chỉ dùng được với user site (`<user>.github.io`) hoặc custom domain; project site dạng `/<repo>/` sẽ hỏng liên kết.
+**1. Netlify / Cloudflare Pages (khuyến cáo nhất)**
+```bash
+npm run build
+netlify deploy --prod --dir=site
+```
+
+**2. GitHub Pages project repo** (dạng `https://<username>.github.io/<repo>/`)
+```yaml
+# .github/workflows/main.yml đã cấu hình sẵn
+# Push code → tự động build & deploy
+# BASE_PATH được set là /<repo-name> (workflow tự động)
+```
+- Workflow sẽ set `BASE_PATH` tự động
+- Tất cả link sẽ được prefix `/repo-name/`
+
+**3. GitHub Pages user site** (rename repo → `<username>.github.io`)
+- Workflow sẽ set `BASE_PATH` empty
+- URL: `https://<username>.github.io/`
+
+**4. Vercel hoặc custom domain**
+```bash
+vercel --prod
+```
+
+**Cách set BASE_PATH thủ công** (nếu deploy khác):
+```bash
+BASE_PATH=/my-repo SITE_URL=https://example.com/my-repo npm run build
+```
 
 ## Checklist bài tập
 
