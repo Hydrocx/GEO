@@ -18,7 +18,6 @@ import about from './pages/about.mjs';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, 'site');
 const PAGES = [home, dwVsLake, kimballInmon, dataMart, etlElt, starSchema, faq, glossary, about];
-const BASE_PATH = process.env.BASE_PATH || ''; // Ví dụ: '/repo-name' cho GitHub Pages project repo
 
 const NAV = [
   ['', 'DW là gì'],
@@ -410,9 +409,19 @@ const NOT_FOUND = (css) => `<!doctype html>
 <body><main class="wrap"><h1>Không tìm thấy trang</h1><p>Trang bạn tìm không tồn tại. Quay về <a href="/">trang chủ</a> hoặc xem <a href="/faq/">câu hỏi thường gặp</a>.</p></main></body></html>
 `;
 
-function applyBasePath(html) {
-  if (!BASE_PATH) return html;
-  return html.replace(/href="\/(?!\/)/g, `href="${BASE_PATH}/`).replace(/src="\/(?!\/)/g, `src="${BASE_PATH}/`);
+// Đổi link nội bộ "/x" thành đường dẫn tương đối theo độ sâu của trang ("./x", "../x"),
+// nhờ đó site chạy đúng cả ở root domain lẫn dưới thư mục con (GitHub Pages project repo).
+function toRelative(html, slug) {
+  const depth = slug.split('/').filter(Boolean).length;
+  const prefix = depth ? '../'.repeat(depth) : './';
+  return html.replace(/(href|src)="\/(?!\/)/g, `$1="${prefix}`);
+}
+
+// 404.html được phục vụ ở mọi đường dẫn nên không dùng được link tương đối:
+// dùng tiền tố tuyệt đối lấy từ phần path của SITE_URL (VD: https://x.github.io/GEO → /GEO).
+function toBaseAbsolute(html) {
+  const base = new URL(SITE.url).pathname.replace(/\/$/, '');
+  return html.replace(/(href|src)="\/(?!\/)/g, `$1="${base}/`);
 }
 
 async function main() {
@@ -421,15 +430,15 @@ async function main() {
   for (const p of PAGES) {
     const dir = join(OUT, p.slug);
     await mkdir(dir, { recursive: true });
-    await writeFile(join(dir, 'index.html'), applyBasePath(render(p, css)));
+    await writeFile(join(dir, 'index.html'), toRelative(render(p, css), p.slug));
   }
-  await writeFile(join(OUT, '404.html'), applyBasePath(NOT_FOUND(css)));
+  await writeFile(join(OUT, '404.html'), toBaseAbsolute(NOT_FOUND(css)));
   await writeFile(join(OUT, 'sitemap.xml'), sitemap());
   await writeFile(join(OUT, 'robots.txt'), robots());
   await writeFile(join(OUT, 'llms.txt'), llmsTxt());
   await cp(join(ROOT, 'assets', 'favicon.svg'), join(OUT, 'favicon.svg'));
   await cp(join(ROOT, 'assets', '_headers'), join(OUT, '_headers'));
-  console.log(`Đã build ${PAGES.length} trang vào ${OUT} (SITE_URL=${SITE.url}, AUTHOR=${AUTHOR.name}, BASE_PATH=${BASE_PATH})`);
+  console.log(`Đã build ${PAGES.length} trang vào ${OUT} (SITE_URL=${SITE.url}, AUTHOR=${AUTHOR.name})`);
 }
 
 main().catch((e) => {

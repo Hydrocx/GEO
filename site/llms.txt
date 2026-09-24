@@ -4,15 +4,15 @@
 
 ## Bài viết
 
-- [Data Warehouse là gì? Định nghĩa, kiến trúc và cách hoạt động](https://example.com/): Data Warehouse (kho dữ liệu) là hệ thống lưu trữ tập trung dữ liệu đã tích hợp từ nhiều nguồn để phân tích và báo cáo. Định nghĩa, 4 đặc tính, kiến trúc, OLTP vs OLAP.
-- [Data Warehouse, Data Lake và Data Lakehouse khác nhau thế nào?](https://example.com/data-warehouse-vs-data-lake-vs-lakehouse/): So sánh Data Warehouse, Data Lake và Data Lakehouse theo loại dữ liệu, schema, chi phí, người dùng và trường hợp sử dụng. Bảng so sánh và hướng dẫn chọn kiến trúc.
-- [Kimball và Inmon: Hai phương pháp xây dựng Data Warehouse](https://example.com/kimball-vs-inmon/): So sánh phương pháp Kimball (bottom-up, mô hình chiều), Inmon (top-down, 3NF) và Data Vault 2.0 trong thiết kế Data Warehouse. Ưu nhược điểm và khi nào nên dùng.
-- [Data Mart là gì? Phân loại và so sánh với Data Warehouse](https://example.com/data-mart-la-gi/): Data Mart là tập con của kho dữ liệu, tập trung vào một chủ đề hoặc phòng ban. Tìm hiểu 3 loại data mart, so sánh với Data Warehouse và ví dụ thực tế.
-- [ETL và ELT khác nhau thế nào?](https://example.com/etl-vs-elt/): ETL biến đổi dữ liệu trước khi nạp vào kho; ELT nạp trước rồi biến đổi ngay trong kho dữ liệu. Bảng so sánh ETL và ELT, Reverse ETL, streaming và công cụ phổ biến.
-- [Star Schema và Snowflake Schema trong Data Warehouse](https://example.com/star-schema-snowflake-schema/): Star schema gồm một bảng fact ở trung tâm nối với các bảng dimension. So sánh star schema và snowflake schema, các loại bảng fact và 8 loại Slowly Changing Dimension.
+- [Data Warehouse là gì? Định nghĩa, kiến trúc và cách hoạt động](https://hydrocx.github.io/GEO/): Data Warehouse (kho dữ liệu) là hệ thống lưu trữ tập trung dữ liệu đã tích hợp từ nhiều nguồn để phân tích và báo cáo. Định nghĩa, 4 đặc tính, kiến trúc, OLTP vs OLAP.
+- [Data Warehouse, Data Lake và Data Lakehouse khác nhau thế nào?](https://hydrocx.github.io/GEO/data-warehouse-vs-data-lake-vs-lakehouse/): So sánh Data Warehouse, Data Lake và Data Lakehouse theo loại dữ liệu, schema, chi phí, người dùng và trường hợp sử dụng. Bảng so sánh và hướng dẫn chọn kiến trúc.
+- [Kimball và Inmon: Hai phương pháp xây dựng Data Warehouse](https://hydrocx.github.io/GEO/kimball-vs-inmon/): So sánh phương pháp Kimball (bottom-up, mô hình chiều), Inmon (top-down, 3NF) và Data Vault 2.0 trong thiết kế Data Warehouse. Ưu nhược điểm và khi nào nên dùng.
+- [Data Mart là gì? Phân loại và so sánh với Data Warehouse](https://hydrocx.github.io/GEO/data-mart-la-gi/): Data Mart là tập con của kho dữ liệu, tập trung vào một chủ đề hoặc phòng ban. Tìm hiểu 3 loại data mart, so sánh với Data Warehouse và ví dụ thực tế.
+- [ETL và ELT khác nhau thế nào?](https://hydrocx.github.io/GEO/etl-vs-elt/): ETL biến đổi dữ liệu trước khi nạp vào kho; ELT nạp trước rồi biến đổi ngay trong kho dữ liệu. Bảng so sánh ETL và ELT, Reverse ETL, streaming và công cụ phổ biến.
+- [Star Schema và Snowflake Schema trong Data Warehouse](https://hydrocx.github.io/GEO/star-schema-snowflake-schema/): Star schema gồm một bảng fact ở trung tâm nối với các bảng dimension. So sánh star schema và snowflake schema, các loại bảng fact và 8 loại Slowly Changing Dimension.
 
 ## Tham khảo
 
-- [Câu hỏi thường gặp về Data Warehouse](https://example.com/faq/): Tổng hợp câu hỏi thường gặp về Data Warehouse, Data Lake, Lakehouse, Data Mart, ETL/ELT, Kimball, Inmon, star schema và SCD — câu trả lời ngắn gọn, có dẫn nguồn.
-- [Thuật ngữ Data Warehouse (Anh – Việt)](https://example.com/thuat-ngu/): Từ điển thuật ngữ Data Warehouse Anh – Việt: OLAP, OLTP, ETL, ELT, fact, dimension, grain, star schema, SCD, Data Vault, lakehouse, medallion. Giải thích ngắn gọn.
-- [Giới thiệu và chính sách biên tập](https://example.com/gioi-thieu/): Giới thiệu website Kho Dữ Liệu Việt: mục tiêu, tác giả, quy trình biên tập, tiêu chuẩn nguồn tham khảo và cách báo lỗi nội dung.
+- [Câu hỏi thường gặp về Data Warehouse](https://hydrocx.github.io/GEO/faq/): Tổng hợp câu hỏi thường gặp về Data Warehouse, Data Lake, Lakehouse, Data Mart, ETL/ELT, Kimball, Inmon, star schema và SCD — câu trả lời ngắn gọn, có dẫn nguồn.
+- [Thuật ngữ Data Warehouse (Anh – Việt)](https://hydrocx.github.io/GEO/thuat-ngu/): Từ điển thuật ngữ Data Warehouse Anh – Việt: OLAP, OLTP, ETL, ELT, fact, dimension, grain, star schema, SCD, Data Vault, lakehouse, medallion. Giải thích ngắn gọn.
+- [Giới thiệu và chính sách biên tập](https://hydrocx.github.io/GEO/gioi-thieu/): Giới thiệu website Kho Dữ Liệu Việt: mục tiêu, tác giả, quy trình biên tập, tiêu chuẩn nguồn tham khảo và cách báo lỗi nội dung.

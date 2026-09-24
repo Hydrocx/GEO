@@ -80,7 +80,10 @@ for (const [path, html] of Object.entries(pages)) {
       if (!ids.includes(href.slice(1))) fail(`anchor không tồn tại: ${href}`);
       continue;
     }
-    const [p, hash] = href.split('#');
+    if (href.startsWith('/')) fail(`link nội bộ tuyệt đối (cần tương đối): ${href}`);
+    const resolved = new URL(href, `http://site${path}`);
+    const p = resolved.pathname;
+    const hash = resolved.hash.slice(1);
     if (['/favicon.svg', '/sitemap.xml', '/llms.txt'].includes(p)) continue;
     if (!(p in pages)) {
       fail(`liên kết nội bộ hỏng: ${href}`);
