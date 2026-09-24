@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thuật ngữ Data Warehouse: Từ điển Anh – Việt | Kho Dữ Liệu Việt</title>
+<meta name="description" content="Từ điển thuật ngữ Data Warehouse Anh – Việt: OLAP, OLTP, ETL, ELT, fact, dimension, grain, star schema, SCD, Data Vault, lakehouse, medallion. Giải thích ngắn gọn.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="Nguyễn Anh Quân">
+<link rel="canonical" href="https://example.com/thuat-ngu/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kho Dữ Liệu Việt">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:title" content="Thuật ngữ Data Warehouse: Từ điển Anh – Việt">
+<meta property="og:description" content="Từ điển thuật ngữ Data Warehouse Anh – Việt: OLAP, OLTP, ETL, ELT, fact, dimension, grain, star schema, SCD, Data Vault, lakehouse, medallion. Giải thích ngắn gọn.">
+<meta property="og:url" content="https://example.com/thuat-ngu/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#000080">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<style>:root{--navy:#000080;--blue:#0069ba;--green:#1fba00;--bg:#f6f8fc;--surface:#ffffff;--soft:#eef3fb;--text:#16202c;--muted:#5a6573;--border:#dbe3ee;--heading:#000080;--link:#0069ba;--shadow:0 1px 2px rgba(0,0,60,.06),0 8px 24px rgba(0,0,60,.06);--radius:14px;--code-bg:#0b1530;--code-text:#e8eef7;}@media (prefers-color-scheme:dark){:root{--bg:#0b0f19;--surface:#131a28;--soft:#1a2336;--text:#e4e9f1;--muted:#9aa6b6;--border:#273248;--heading:#a9bcff;--link:#6cbcff;--shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);--code-bg:#060a14;}}*,*::before,*::after{box-sizing:border-box;}html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:84px;}body{margin:0;background:var(--bg);color:var(--text);font:17px/1.7 Arial,"Helvetica Neue",Helvetica,sans-serif;}.wrap{max-width:1160px;margin:0 auto;padding:0 16px;}a{color:var(--link);text-underline-offset:3px;text-decoration-thickness:1px;}a:hover{color:var(--navy);}a:focus-visible,summary:focus-visible{outline:3px solid var(--green);outline-offset:2px;border-radius:4px;}.skip{position:absolute;left:-999px;}.skip:focus{left:16px;top:8px;background:var(--surface);padding:8px 12px;z-index:50;}.site-header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:saturate(160%) blur(10px);-webkit-backdrop-filter:saturate(160%) blur(10px);border-bottom:1px solid var(--border);}@media (prefers-color-scheme:dark){.site-header{background:rgba(11,15,25,.9);}}.header-inner{display:flex;align-items:center;gap:24px;min-height:64px;}.brand{display:inline-flex;align-items:center;gap:10px;color:var(--heading);font-weight:700;font-size:18px;text-decoration:none;white-space:nowrap;}.brand b{color:var(--green);}.brand:hover{color:var(--heading);}.logo{flex:none;border-radius:8px;}.main-nav{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none;}.main-nav::-webkit-scrollbar{display:none;}.main-nav a{color:var(--muted);text-decoration:none;font-size:15px;white-space:nowrap;padding:7px 12px;border-radius:999px;transition:background .15s,color .15s;}.main-nav a:hover{background:var(--soft);color:var(--heading);}.main-nav a[aria-current="page"]{background:var(--navy);color:#fff;}.hero{position:relative;overflow:hidden;color:#fff;background:radial-gradient(900px 300px at 85% -10%,rgba(31,186,0,.28),transparent 60%),radial-gradient(700px 320px at 0% 120%,rgba(0,105,186,.55),transparent 60%),linear-gradient(135deg,#000080 0%,#00297a 55%,#0069ba 100%);padding:28px 0 100px;}.hero::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);background-size:32px 32px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 70%);mask-image:linear-gradient(90deg,transparent,#000 70%);}.hero .wrap{position:relative;z-index:1;}.crumbs ol{list-style:none;display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:0 0 18px;font-size:14px;color:rgba(255,255,255,.75);}.crumbs a{color:#fff;text-decoration:none;}.crumbs a:hover{text-decoration:underline;color:#fff;}.crumbs li + li::before{content:"›";margin-right:6px;opacity:.7;}.eyebrow{display:inline-block;margin:0 0 12px;padding:4px 12px;border-radius:999px;background:rgba(31,186,0,.2);border:1px solid rgba(31,186,0,.6);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}.hero h1{color:#fff;font-size:42px;line-height:1.18;margin:0 0 14px;max-width:880px;letter-spacing:-.01em;}.lede{font-size:19px;line-height:1.6;color:rgba(255,255,255,.88);max-width:760px;margin:0 0 20px;}.meta{list-style:none;display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:0;font-size:14px;}.meta li{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:4px 12px;border-radius:999px;}.meta a{color:#fff;font-weight:700;text-decoration:none;}.layout{display:block;padding-top:32px;}.content{min-width:0;}.sidebar{margin-bottom:24px;}@media (min-width:1024px){.layout.has-toc{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:48px;align-items:start;}.layout.has-toc .sidebar{grid-column:2;grid-row:1;position:sticky;top:88px;margin:-64px 0 0;max-height:calc(100vh - 110px);overflow-y:auto;}.layout.has-toc .content{grid-column:1;grid-row:1;}}.layout:not(.has-toc) .content{max-width:820px;}.toc details{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);}.toc summary{cursor:pointer;font-weight:700;color:var(--heading);font-size:15px;letter-spacing:.04em;text-transform:uppercase;list-style:none;}.toc summary::-webkit-details-marker{display:none;}.toc summary::after{content:"▾";float:right;color:var(--muted);}.toc details:not([open]) summary::after{content:"▸";}.toc ol{margin:10px 0 0;padding:0;list-style:none;counter-reset:t;font-size:14.5px;line-height:1.45;}.toc li{counter-increment:t;}.toc a{display:flex;gap:10px;padding:7px 8px;border-radius:8px;color:var(--text);text-decoration:none;}.toc a::before{content:counter(t,decimal-leading-zero);color:var(--blue);font-weight:700;font-size:12.5px;padding-top:1px;}.toc a:hover{background:var(--soft);color:var(--heading);}h2{color:var(--heading);font-size:27px;line-height:1.3;margin:0 0 14px;letter-spacing:-.005em;}h3{font-size:19px;line-height:1.4;margin:22px 0 6px;}.content>section,.content>.topics{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px 30px;margin:0 0 24px;box-shadow:var(--shadow);}.content>section>h2::before{content:"";display:block;width:44px;height:4px;border-radius:4px;margin-bottom:14px;background:linear-gradient(90deg,var(--green),var(--blue));}.content p,.content li{max-width:72ch;}.content ul,.content ol{padding-left:22px;}.content li{margin:6px 0;}.content li::marker{color:var(--blue);font-weight:700;}dfn{font-style:normal;font-weight:700;color:var(--heading);}strong{color:inherit;}.tldr{position:relative;margin:-64px 0 24px;padding:24px 28px 18px;background:var(--surface);border-radius:var(--radius);box-shadow:0 16px 40px rgba(0,0,80,.16);border:1px solid var(--border);border-top:5px solid var(--green);}.tldr h2{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin:0 0 8px;}.tldr h2::before{content:"⚡ ";}.tldr ul{margin:0;padding-left:20px;}.tldr li{margin:8px 0;}.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}.card{display:flex;flex-direction:column;gap:6px;padding:18px 20px;text-decoration:none;color:var(--text);background:var(--soft);border:1px solid var(--border);border-radius:12px;transition:transform .15s,box-shadow .15s,border-color .15s;}.card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--blue);color:var(--text);}.card-kicker{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green);}.card strong{color:var(--heading);font-size:17px;line-height:1.35;}.card-desc{font-size:14.5px;line-height:1.5;color:var(--muted);flex:1;}.card-go{font-size:14px;font-weight:700;color:var(--link);margin-top:4px;}blockquote{position:relative;margin:20px 0;padding:20px 24px 16px 60px;background:var(--soft);border-radius:12px;border-left:4px solid var(--blue);}blockquote::before{content:"“";position:absolute;left:16px;top:-6px;font:700 64px/1 Georgia,serif;color:var(--blue);opacity:.5;}blockquote p{margin:0 0 8px;font-size:18px;font-style:italic;}blockquote footer{font-size:14px;color:var(--muted);}.table-wrap{overflow-x:auto;margin:18px 0;border:1px solid var(--border);border-radius:12px;-webkit-overflow-scrolling:touch;}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.5;min-width:560px;}caption{caption-side:top;text-align:left;font-weight:700;font-size:14px;padding:12px 16px;color:var(--muted);background:var(--soft);border-bottom:1px solid var(--border);}th,td{padding:11px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border);}thead th{background:var(--navy);color:#fff;font-size:14px;letter-spacing:.02em;}@media (prefers-color-scheme:dark){thead th{background:#1b2670;}}tbody tr:last-child>*{border-bottom:0;}tbody tr:nth-child(even) td{background:color-mix(in srgb,var(--soft) 55%,transparent);}tbody tr:hover td,tbody tr:hover th{background:var(--soft);}tbody th{color:var(--heading);font-weight:700;min-width:130px;}.defs{margin:0;}.defs dt{font-weight:700;margin-top:16px;color:var(--heading);}.defs dd{margin:4px 0 0;padding-left:14px;border-left:3px solid var(--border);}.glossary{display:grid;grid-template-columns:1fr;gap:0;}.note{font-size:14.5px;color:var(--muted);background:var(--soft);padding:10px 14px;border-radius:10px;}sup.cite{font-size:11px;line-height:0;margin-left:1px;}sup.cite a{text-decoration:none;font-weight:700;padding:1px 4px;border-radius:4px;background:var(--soft);}sup.cite a:hover{background:var(--blue);color:#fff;}pre{background:var(--code-bg);color:var(--code-text);padding:16px 18px;border-radius:12px;overflow-x:auto;font-size:14px;line-height:1.6;}code{font-family:Consolas,"SFMono-Regular",Menlo,monospace;}.diagram{margin:20px 0;padding:16px;background:var(--soft);border-radius:12px;}.diagram svg{width:100%;height:auto;display:block;}.d-box{fill:var(--surface);stroke:var(--blue);stroke-width:2;}.d-core{fill:var(--navy);stroke:var(--navy);}.d-text{fill:var(--text);}.d-text-core{fill:#fff;font-weight:700;}.d-arrow path{stroke:var(--green);stroke-width:3;fill:none;}figcaption{font-size:14px;color:var(--muted);margin-top:8px;}.faq .qa{border:1px solid var(--border);border-radius:12px;padding:14px 18px 4px 54px;margin:12px 0;position:relative;background:var(--bg);}.faq .qa::before{content:"?";position:absolute;left:14px;top:14px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#fff;background:var(--blue);}.faq .qa h3{margin:2px 0 6px;font-size:17.5px;color:var(--heading);}.faq .qa p{margin:0 0 10px;}.more{margin:14px 0 0;font-weight:700;}.more a{text-decoration:none;}.sources ol{font-size:14.5px;padding-left:26px;line-height:1.55;}.sources li{margin-bottom:8px;word-break:break-word;}.sources li:target{background:color-mix(in srgb,var(--green) 18%,transparent);border-radius:6px;}.to-top{text-align:right;font-size:14px;margin:8px 0 0;}.to-top a{text-decoration:none;}.site-footer{margin-top:48px;background:#000050;color:rgba(255,255,255,.78);font-size:14.5px;}.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px;padding-top:40px;padding-bottom:28px;}.site-footer .brand,.site-footer .brand:hover{color:#fff;}.site-footer h2{color:#fff;font-size:14px;letter-spacing:.08em;text-transform:uppercase;margin:4px 0 12px;}.site-footer ul{list-style:none;padding:0;margin:0;}.site-footer li{margin:6px 0;}.site-footer a{color:rgba(255,255,255,.85);text-decoration:none;}.site-footer a:hover{color:#fff;text-decoration:underline;}.footer-bottom{border-top:1px solid rgba(255,255,255,.12);padding-top:16px;padding-bottom:20px;font-size:13px;color:rgba(255,255,255,.6);}@media (max-width:800px){.header-inner{flex-wrap:wrap;gap:4px;padding-top:10px;padding-bottom:6px;min-height:0;}.main-nav{margin-left:-12px;width:calc(100% + 24px);padding:0 12px 4px;}html{scroll-padding-top:120px;}.footer-grid{grid-template-columns:1fr 1fr;}.footer-grid>div:first-child{grid-column:1 / -1;}}@media (max-width:600px){body{font-size:16px;}.hero{padding:20px 0 76px;}.hero h1{font-size:29px;}.lede{font-size:16.5px;}h2{font-size:22px;}.content>section,.content>.topics{padding:20px 18px;border-radius:12px;}.tldr{padding:18px 18px 12px;}.faq .qa{padding-left:48px;}.footer-grid{grid-template-columns:1fr;}}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.card,.main-nav a{transition:none;}.card:hover{transform:none;}}@media print{.site-header,.site-footer,.sidebar,.skip,.to-top{display:none;}.hero{background:none;color:#000;}.hero h1,.lede,.crumbs a,.meta a{color:#000;}.content>section{box-shadow:none;}}@media (max-width:1023px){.layout.has-toc .sidebar{position:relative;margin-top:-64px;}.layout.has-toc .tldr{margin-top:0;}}</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://example.com/#website",
+      "url": "https://example.com/",
+      "name": "Kho Dữ Liệu Việt",
+      "description": "Kiến thức Data Warehouse, Data Mart, Data Lakehouse bằng tiếng Việt",
+      "inLanguage": "vi",
+      "publisher": {
+        "@id": "https://example.com/gioi-thieu/#author"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://example.com/gioi-thieu/#author",
+      "name": "Nguyễn Anh Quân",
+      "jobTitle": "Sinh viên / Data Engineer",
+      "url": "https://example.com/gioi-thieu/",
+      "knowsAbout": [
+        "Data warehouse",
+        "Data modeling",
+        "ETL",
+        "Business intelligence"
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://example.com/thuat-ngu/#webpage",
+      "url": "https://example.com/thuat-ngu/",
+      "name": "Thuật ngữ Data Warehouse: Từ điển Anh – Việt",
+      "description": "Từ điển thuật ngữ Data Warehouse Anh – Việt: OLAP, OLTP, ETL, ELT, fact, dimension, grain, star schema, SCD, Data Vault, lakehouse, medallion. Giải thích ngắn gọn.",
+      "inLanguage": "vi",
+      "isPartOf": {
+        "@id": "https://example.com/#website"
+      },
+      "datePublished": "2026-09-24",
+      "dateModified": "2026-09-24",
+      "breadcrumb": {
+        "@id": "https://example.com/thuat-ngu/#breadcrumb"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Data warehouse",
+          "sameAs": "https://en.wikipedia.org/wiki/Data_warehouse",
+          "alternateName": "Kho dữ liệu"
+        }
+      ],
+      "mainEntity": {
+        "@id": "https://example.com/thuat-ngu/#terms"
+      }
+    },
+    {
+      "@type": "DefinedTermSet",
+      "@id": "https://example.com/thuat-ngu/#terms",
+      "name": "Thuật ngữ Data Warehouse",
+      "inLanguage": "vi",
+      "hasDefinedTerm": [
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#data-warehouse",
+          "name": "Data Warehouse (DW, DWH)",
+          "description": "Kho dữ liệu: hệ thống lưu trữ tập trung dữ liệu đã tích hợp, có lịch sử, phục vụ phân tích và báo cáo.",
+          "url": "https://example.com/thuat-ngu/#data-warehouse",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#data-mart",
+          "name": "Data Mart",
+          "description": "Kho dữ liệu phạm vi hẹp, phục vụ một phòng ban hoặc một chủ đề nghiệp vụ.",
+          "url": "https://example.com/thuat-ngu/#data-mart",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#data-lake",
+          "name": "Data Lake",
+          "description": "Hồ dữ liệu: kho lưu trữ dữ liệu thô mọi định dạng ở quy mô lớn, áp schema khi đọc.",
+          "url": "https://example.com/thuat-ngu/#data-lake",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#data-lakehouse",
+          "name": "Data Lakehouse",
+          "description": "Kiến trúc kết hợp lưu trữ mở chi phí thấp của data lake với giao dịch ACID và quản trị dữ liệu của data warehouse.",
+          "url": "https://example.com/thuat-ngu/#data-lakehouse",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#edw",
+          "name": "Enterprise Data Warehouse (EDW)",
+          "description": "Kho dữ liệu doanh nghiệp, tích hợp dữ liệu toàn tổ chức; trung tâm của phương pháp Inmon.",
+          "url": "https://example.com/thuat-ngu/#edw",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#oltp",
+          "name": "OLTP",
+          "description": "Online Transaction Processing: hệ thống xử lý giao dịch, tối ưu cho đọc/ghi từng bản ghi.",
+          "url": "https://example.com/thuat-ngu/#oltp",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#olap",
+          "name": "OLAP",
+          "description": "Online Analytical Processing: xử lý phân tích, tối ưu cho truy vấn đọc nhiều và tổng hợp dữ liệu lớn.",
+          "url": "https://example.com/thuat-ngu/#olap",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#etl",
+          "name": "ETL",
+          "description": "Extract – Transform – Load: trích xuất, biến đổi trên engine riêng, rồi nạp vào kho.",
+          "url": "https://example.com/thuat-ngu/#etl",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#elt",
+          "name": "ELT",
+          "description": "Extract – Load – Transform: nạp dữ liệu thô vào kho trước, biến đổi ngay trong kho.",
+          "url": "https://example.com/thuat-ngu/#elt",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#reverse-etl",
+          "name": "Reverse ETL",
+          "description": "Đưa dữ liệu đã mô hình hóa từ kho dữ liệu ngược về các hệ thống vận hành như CRM.",
+          "url": "https://example.com/thuat-ngu/#reverse-etl",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#staging",
+          "name": "Staging area",
+          "description": "Vùng lưu tạm dữ liệu trích xuất từ nguồn trước khi làm sạch và nạp vào kho.",
+          "url": "https://example.com/thuat-ngu/#staging",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#fact-table",
+          "name": "Fact table (bảng fact)",
+          "description": "Bảng chứa số đo định lượng của sự kiện nghiệp vụ và khóa ngoại tới các dimension.",
+          "url": "https://example.com/thuat-ngu/#fact-table",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#dimension-table",
+          "name": "Dimension table (bảng dimension)",
+          "description": "Bảng chứa thuộc tính mô tả dùng để lọc, nhóm và gắn nhãn số đo.",
+          "url": "https://example.com/thuat-ngu/#dimension-table",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#grain",
+          "name": "Grain",
+          "description": "Mức chi tiết mà một dòng trong bảng fact biểu diễn.",
+          "url": "https://example.com/thuat-ngu/#grain",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#star-schema",
+          "name": "Star schema",
+          "description": "Lược đồ hình sao: bảng fact ở trung tâm nối trực tiếp với các dimension phi chuẩn hóa.",
+          "url": "https://example.com/thuat-ngu/#star-schema",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#snowflake-schema",
+          "name": "Snowflake schema",
+          "description": "Lược đồ bông tuyết: dimension được chuẩn hóa thành nhiều bảng phân cấp.",
+          "url": "https://example.com/thuat-ngu/#snowflake-schema",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#conformed-dimension",
+          "name": "Conformed dimension",
+          "description": "Dimension dùng chung với cùng khóa và cùng ý nghĩa giữa nhiều bảng fact.",
+          "url": "https://example.com/thuat-ngu/#conformed-dimension",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#scd",
+          "name": "Slowly Changing Dimension (SCD)",
+          "description": "Kỹ thuật xử lý thay đổi thuộc tính dimension theo thời gian; có 8 loại từ Type 0 đến Type 7.",
+          "url": "https://example.com/thuat-ngu/#scd",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#surrogate-key",
+          "name": "Surrogate key",
+          "description": "Khóa thay thế do kho dữ liệu tự sinh, không phụ thuộc khóa của hệ thống nguồn.",
+          "url": "https://example.com/thuat-ngu/#surrogate-key",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#data-vault",
+          "name": "Data Vault",
+          "description": "Phương pháp mô hình hóa gồm Hub, Link, Satellite, tối ưu cho tích hợp nhiều nguồn và lưu vết.",
+          "url": "https://example.com/thuat-ngu/#data-vault",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#medallion",
+          "name": "Medallion architecture",
+          "description": "Mẫu tổ chức dữ liệu lakehouse theo 3 tầng Bronze (thô), Silver (đã làm sạch), Gold (đã tổng hợp).",
+          "url": "https://example.com/thuat-ngu/#medallion",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        },
+        {
+          "@type": "DefinedTerm",
+          "@id": "https://example.com/thuat-ngu/#semantic-layer",
+          "name": "Semantic layer",
+          "description": "Lớp ngữ nghĩa đặt trên kho dữ liệu, định nghĩa số đo, quan hệ và tên thân thiện cho người dùng BI.",
+          "url": "https://example.com/thuat-ngu/#semantic-layer",
+          "inDefinedTermSet": {
+            "@id": "https://example.com/thuat-ngu/#terms"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://example.com/thuat-ngu/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Trang chủ",
+          "item": "https://example.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Thuật ngữ Data Warehouse (Anh – Việt)",
+          "item": "https://example.com/thuat-ngu/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#noi-dung">Bỏ qua tới nội dung</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><svg class="logo" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#000080"/><ellipse cx="16" cy="9" rx="9" ry="3.5" fill="#1fba00"/><path d="M7 9v14c0 1.9 4 3.5 9 3.5s9-1.6 9-3.5V9" fill="none" stroke="#fff" stroke-width="2"/><path d="M7 16c0 1.9 4 3.5 9 3.5s9-1.6 9-3.5" fill="none" stroke="#5cb3ff" stroke-width="2"/></svg><span>Kho Dữ Liệu <b>Việt</b></span></a>
+    <nav class="main-nav" aria-label="Điều hướng chính"><a href="/">DW là gì</a><a href="/data-warehouse-vs-data-lake-vs-lakehouse/">DW vs Lake</a><a href="/kimball-vs-inmon/">Kimball vs Inmon</a><a href="/data-mart-la-gi/">Data Mart</a><a href="/etl-vs-elt/">ETL vs ELT</a><a href="/star-schema-snowflake-schema/">Star schema</a><a href="/faq/">FAQ</a><a href="/thuat-ngu/" aria-current="page">Thuật ngữ</a></nav>
+  </div>
+</header>
+<main id="noi-dung">
+<article>
+  <header class="hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Trang chủ</a></li><li aria-current="page">Thuật ngữ Data Warehouse (Anh – Việt)</li></ol></nav>
+      <p class="eyebrow">Từ điển thuật ngữ</p>
+      <h1>Thuật ngữ Data Warehouse (Anh – Việt)</h1>
+      <p class="lede">Từ điển thuật ngữ Data Warehouse Anh – Việt: OLAP, OLTP, ETL, ELT, fact, dimension, grain, star schema, SCD, Data Vault, lakehouse, medallion. Giải thích ngắn gọn.</p>
+      <ul class="meta">
+        <li>Tác giả: <a href="/gioi-thieu/" rel="author">Nguyễn Anh Quân</a></li>
+        <li>Cập nhật: <time datetime="2026-09-24">24/09/2026</time></li>
+        <li>2 phút đọc</li>
+        
+      </ul>
+    </div>
+  </header>
+  <div class="wrap layout">
+    
+    <div class="content">
+      <aside class="tldr" aria-label="Trả lời nhanh">
+        <h2>Trả lời nhanh</h2>
+        <ul>
+          <li>22 thuật ngữ cốt lõi về kho dữ liệu, mỗi thuật ngữ có định nghĩa một câu và liên kết tới bài viết chi tiết.</li>
+        </ul>
+      </aside>
+      
+      
+<section id="danh-sach">
+  <h2>Danh sách thuật ngữ</h2>
+  <dl class="defs glossary">
+    <dt id="data-warehouse"><dfn>Data Warehouse (DW, DWH)</dfn></dt>
+    <dd>Kho dữ liệu: hệ thống lưu trữ tập trung dữ liệu đã tích hợp, có lịch sử, phục vụ phân tích và báo cáo. <a href="/">Xem thêm</a></dd>
+    <dt id="data-mart"><dfn>Data Mart</dfn></dt>
+    <dd>Kho dữ liệu phạm vi hẹp, phục vụ một phòng ban hoặc một chủ đề nghiệp vụ. <a href="/data-mart-la-gi/">Xem thêm</a></dd>
+    <dt id="data-lake"><dfn>Data Lake</dfn></dt>
+    <dd>Hồ dữ liệu: kho lưu trữ dữ liệu thô mọi định dạng ở quy mô lớn, áp schema khi đọc. <a href="/data-warehouse-vs-data-lake-vs-lakehouse/">Xem thêm</a></dd>
+    <dt id="data-lakehouse"><dfn>Data Lakehouse</dfn></dt>
+    <dd>Kiến trúc kết hợp lưu trữ mở chi phí thấp của data lake với giao dịch ACID và quản trị dữ liệu của data warehouse. <a href="/data-warehouse-vs-data-lake-vs-lakehouse/">Xem thêm</a></dd>
+    <dt id="edw"><dfn>Enterprise Data Warehouse (EDW)</dfn></dt>
+    <dd>Kho dữ liệu doanh nghiệp, tích hợp dữ liệu toàn tổ chức; trung tâm của phương pháp Inmon. <a href="/kimball-vs-inmon/">Xem thêm</a></dd>
+    <dt id="oltp"><dfn>OLTP</dfn></dt>
+    <dd>Online Transaction Processing: hệ thống xử lý giao dịch, tối ưu cho đọc/ghi từng bản ghi. <a href="/#oltp-olap">Xem thêm</a></dd>
+    <dt id="olap"><dfn>OLAP</dfn></dt>
+    <dd>Online Analytical Processing: xử lý phân tích, tối ưu cho truy vấn đọc nhiều và tổng hợp dữ liệu lớn. <a href="/#oltp-olap">Xem thêm</a></dd>
+    <dt id="etl"><dfn>ETL</dfn></dt>
+    <dd>Extract – Transform – Load: trích xuất, biến đổi trên engine riêng, rồi nạp vào kho. <a href="/etl-vs-elt/">Xem thêm</a></dd>
+    <dt id="elt"><dfn>ELT</dfn></dt>
+    <dd>Extract – Load – Transform: nạp dữ liệu thô vào kho trước, biến đổi ngay trong kho. <a href="/etl-vs-elt/">Xem thêm</a></dd>
+    <dt id="reverse-etl"><dfn>Reverse ETL</dfn></dt>
+    <dd>Đưa dữ liệu đã mô hình hóa từ kho dữ liệu ngược về các hệ thống vận hành như CRM. <a href="/etl-vs-elt/#reverse-etl">Xem thêm</a></dd>
+    <dt id="staging"><dfn>Staging area</dfn></dt>
+    <dd>Vùng lưu tạm dữ liệu trích xuất từ nguồn trước khi làm sạch và nạp vào kho. <a href="/#kien-truc">Xem thêm</a></dd>
+    <dt id="fact-table"><dfn>Fact table (bảng fact)</dfn></dt>
+    <dd>Bảng chứa số đo định lượng của sự kiện nghiệp vụ và khóa ngoại tới các dimension. <a href="/star-schema-snowflake-schema/">Xem thêm</a></dd>
+    <dt id="dimension-table"><dfn>Dimension table (bảng dimension)</dfn></dt>
+    <dd>Bảng chứa thuộc tính mô tả dùng để lọc, nhóm và gắn nhãn số đo. <a href="/star-schema-snowflake-schema/">Xem thêm</a></dd>
+    <dt id="grain"><dfn>Grain</dfn></dt>
+    <dd>Mức chi tiết mà một dòng trong bảng fact biểu diễn. <a href="/star-schema-snowflake-schema/#fact-dimension">Xem thêm</a></dd>
+    <dt id="star-schema"><dfn>Star schema</dfn></dt>
+    <dd>Lược đồ hình sao: bảng fact ở trung tâm nối trực tiếp với các dimension phi chuẩn hóa. <a href="/star-schema-snowflake-schema/">Xem thêm</a></dd>
+    <dt id="snowflake-schema"><dfn>Snowflake schema</dfn></dt>
+    <dd>Lược đồ bông tuyết: dimension được chuẩn hóa thành nhiều bảng phân cấp. <a href="/star-schema-snowflake-schema/#snowflake-schema">Xem thêm</a></dd>
+    <dt id="conformed-dimension"><dfn>Conformed dimension</dfn></dt>
+    <dd>Dimension dùng chung với cùng khóa và cùng ý nghĩa giữa nhiều bảng fact. <a href="/kimball-vs-inmon/#kimball">Xem thêm</a></dd>
+    <dt id="scd"><dfn>Slowly Changing Dimension (SCD)</dfn></dt>
+    <dd>Kỹ thuật xử lý thay đổi thuộc tính dimension theo thời gian; có 8 loại từ Type 0 đến Type 7. <a href="/star-schema-snowflake-schema/#scd">Xem thêm</a></dd>
+    <dt id="surrogate-key"><dfn>Surrogate key</dfn></dt>
+    <dd>Khóa thay thế do kho dữ liệu tự sinh, không phụ thuộc khóa của hệ thống nguồn. <a href="/star-schema-snowflake-schema/#fact-dimension">Xem thêm</a></dd>
+    <dt id="data-vault"><dfn>Data Vault</dfn></dt>
+    <dd>Phương pháp mô hình hóa gồm Hub, Link, Satellite, tối ưu cho tích hợp nhiều nguồn và lưu vết. <a href="/kimball-vs-inmon/#data-vault">Xem thêm</a></dd>
+    <dt id="medallion"><dfn>Medallion architecture</dfn></dt>
+    <dd>Mẫu tổ chức dữ liệu lakehouse theo 3 tầng Bronze (thô), Silver (đã làm sạch), Gold (đã tổng hợp). <a href="/#kien-truc">Xem thêm</a></dd>
+    <dt id="semantic-layer"><dfn>Semantic layer</dfn></dt>
+    <dd>Lớp ngữ nghĩa đặt trên kho dữ liệu, định nghĩa số đo, quan hệ và tên thân thiện cho người dùng BI. <a href="/#kien-truc">Xem thêm</a></dd>
+  </dl>
+</section>
+
+      
+      <section class="related" id="bai-lien-quan"><h2>Bài liên quan</h2><div class="cards"><a class="card" href="/"><span class="card-kicker">DW là gì</span><strong>Data Warehouse là gì? Định nghĩa, kiến trúc và cách hoạt động</strong><span class="card-desc">Data Warehouse (kho dữ liệu) là hệ thống lưu trữ tập trung dữ liệu đã tích hợp từ nhiều nguồn để phân tích và báo cáo.</span><span class="card-go" aria-hidden="true">Đọc bài →</span></a><a class="card" href="/faq/"><span class="card-kicker">FAQ</span><strong>Câu hỏi thường gặp về Data Warehouse</strong><span class="card-desc">Tổng hợp câu hỏi thường gặp về Data Warehouse, Data Lake, Lakehouse, Data Mart, ETL/ELT, Kimball, Inmon, star schema và SCD — câu trả lời ngắn gọn, có dẫn nguồn.</span><span class="card-go" aria-hidden="true">Đọc bài →</span></a></div></section>
+      
+      <p class="to-top"><a href="#noi-dung">↑ Lên đầu trang</a></p>
+    </div>
+  </div>
+</article>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <a class="brand" href="/"><svg class="logo" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#000080"/><ellipse cx="16" cy="9" rx="9" ry="3.5" fill="#1fba00"/><path d="M7 9v14c0 1.9 4 3.5 9 3.5s9-1.6 9-3.5V9" fill="none" stroke="#fff" stroke-width="2"/><path d="M7 16c0 1.9 4 3.5 9 3.5s9-1.6 9-3.5" fill="none" stroke="#5cb3ff" stroke-width="2"/></svg><span>Kho Dữ Liệu <b>Việt</b></span></a>
+      <p>Kiến thức Data Warehouse, Data Mart, Data Lakehouse bằng tiếng Việt. Nội dung trung lập, mọi khẳng định kỹ thuật đều có dẫn nguồn.</p>
+    </div>
+    <div>
+      <h2>Chủ đề</h2>
+      <ul><li><a href="/">DW là gì</a></li><li><a href="/data-warehouse-vs-data-lake-vs-lakehouse/">DW vs Lake</a></li><li><a href="/kimball-vs-inmon/">Kimball vs Inmon</a></li><li><a href="/data-mart-la-gi/">Data Mart</a></li><li><a href="/etl-vs-elt/">ETL vs ELT</a></li><li><a href="/star-schema-snowflake-schema/">Star schema</a></li></ul>
+    </div>
+    <div>
+      <h2>Tài nguyên</h2>
+      <ul><li><a href="/faq/">Câu hỏi thường gặp</a></li><li><a href="/thuat-ngu/">Thuật ngữ</a></li><li><a href="/gioi-thieu/">Giới thiệu &amp; chính sách biên tập</a></li><li><a href="/sitemap.xml">Sitemap</a></li><li><a href="/llms.txt">llms.txt</a></li></ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">© 2026 Nguyễn Anh Quân · Cập nhật 24/09/2026</div>
+</footer>
+</body>
+</html>

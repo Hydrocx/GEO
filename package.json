@@ -1,0 +1,16 @@
+{
+  "name": "kho-du-lieu-viet-geo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Website kiến thức Data Warehouse tối ưu GEO (Generative Engine Optimization)",
+  "scripts": {
+    "build": "node build/build.mjs",
+    "check": "node build/check.mjs",
+    "check:external": "node build/check.mjs --external",
+    "serve": "python -m http.server 8080 --directory site"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

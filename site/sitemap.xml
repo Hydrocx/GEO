@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://example.com/</loc><lastmod>2026-09-24</lastmod></url>
+  <url><loc>https://example.com/data-warehouse-vs-data-lake-vs-lakehouse/</loc><lastmod>2026-09-24</lastmod></url>
+  <url><loc>https://example.com/kimball-vs-inmon/</loc><lastmod>2026-09-24</lastmod></url>
+  <url><loc>https://example.com/data-mart-la-gi/</loc><lastmod>2026-09-24</lastmod></url>
+  <url><loc>https://example.com/etl-vs-elt/</loc><lastmod>2026-09-24</lastmod></url>
+  <url><loc>https://example.com/star-schema-snowflake-schema/</loc><lastmod>2026-09-24</lastmod></url>
+  <url><loc>https://example.com/faq/</loc><lastmod>2026-09-24</lastmod></url>
+  <url><loc>https://example.com/thuat-ngu/</loc><lastmod>2026-09-24</lastmod></url>
+  <url><loc>https://example.com/gioi-thieu/</loc><lastmod>2026-09-24</lastmod></url>
+</urlset>

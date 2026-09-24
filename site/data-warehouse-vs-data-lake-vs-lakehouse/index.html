@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data Warehouse vs Data Lake vs Lakehouse | Kho Dữ Liệu Việt</title>
+<meta name="description" content="So sánh Data Warehouse, Data Lake và Data Lakehouse theo loại dữ liệu, schema, chi phí, người dùng và trường hợp sử dụng. Bảng so sánh và hướng dẫn chọn kiến trúc.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="Nguyễn Anh Quân">
+<link rel="canonical" href="https://example.com/data-warehouse-vs-data-lake-vs-lakehouse/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Kho Dữ Liệu Việt">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:title" content="Data Warehouse vs Data Lake vs Lakehouse">
+<meta property="og:description" content="So sánh Data Warehouse, Data Lake và Data Lakehouse theo loại dữ liệu, schema, chi phí, người dùng và trường hợp sử dụng. Bảng so sánh và hướng dẫn chọn kiến trúc.">
+<meta property="og:url" content="https://example.com/data-warehouse-vs-data-lake-vs-lakehouse/">
+<meta property="article:published_time" content="2026-09-24">
+<meta property="article:modified_time" content="2026-09-24">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#000080">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<style>:root{--navy:#000080;--blue:#0069ba;--green:#1fba00;--bg:#f6f8fc;--surface:#ffffff;--soft:#eef3fb;--text:#16202c;--muted:#5a6573;--border:#dbe3ee;--heading:#000080;--link:#0069ba;--shadow:0 1px 2px rgba(0,0,60,.06),0 8px 24px rgba(0,0,60,.06);--radius:14px;--code-bg:#0b1530;--code-text:#e8eef7;}@media (prefers-color-scheme:dark){:root{--bg:#0b0f19;--surface:#131a28;--soft:#1a2336;--text:#e4e9f1;--muted:#9aa6b6;--border:#273248;--heading:#a9bcff;--link:#6cbcff;--shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);--code-bg:#060a14;}}*,*::before,*::after{box-sizing:border-box;}html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:84px;}body{margin:0;background:var(--bg);color:var(--text);font:17px/1.7 Arial,"Helvetica Neue",Helvetica,sans-serif;}.wrap{max-width:1160px;margin:0 auto;padding:0 16px;}a{color:var(--link);text-underline-offset:3px;text-decoration-thickness:1px;}a:hover{color:var(--navy);}a:focus-visible,summary:focus-visible{outline:3px solid var(--green);outline-offset:2px;border-radius:4px;}.skip{position:absolute;left:-999px;}.skip:focus{left:16px;top:8px;background:var(--surface);padding:8px 12px;z-index:50;}.site-header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:saturate(160%) blur(10px);-webkit-backdrop-filter:saturate(160%) blur(10px);border-bottom:1px solid var(--border);}@media (prefers-color-scheme:dark){.site-header{background:rgba(11,15,25,.9);}}.header-inner{display:flex;align-items:center;gap:24px;min-height:64px;}.brand{display:inline-flex;align-items:center;gap:10px;color:var(--heading);font-weight:700;font-size:18px;text-decoration:none;white-space:nowrap;}.brand b{color:var(--green);}.brand:hover{color:var(--heading);}.logo{flex:none;border-radius:8px;}.main-nav{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none;}.main-nav::-webkit-scrollbar{display:none;}.main-nav a{color:var(--muted);text-decoration:none;font-size:15px;white-space:nowrap;padding:7px 12px;border-radius:999px;transition:background .15s,color .15s;}.main-nav a:hover{background:var(--soft);color:var(--heading);}.main-nav a[aria-current="page"]{background:var(--navy);color:#fff;}.hero{position:relative;overflow:hidden;color:#fff;background:radial-gradient(900px 300px at 85% -10%,rgba(31,186,0,.28),transparent 60%),radial-gradient(700px 320px at 0% 120%,rgba(0,105,186,.55),transparent 60%),linear-gradient(135deg,#000080 0%,#00297a 55%,#0069ba 100%);padding:28px 0 100px;}.hero::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);background-size:32px 32px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 70%);mask-image:linear-gradient(90deg,transparent,#000 70%);}.hero .wrap{position:relative;z-index:1;}.crumbs ol{list-style:none;display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:0 0 18px;font-size:14px;color:rgba(255,255,255,.75);}.crumbs a{color:#fff;text-decoration:none;}.crumbs a:hover{text-decoration:underline;color:#fff;}.crumbs li + li::before{content:"›";margin-right:6px;opacity:.7;}.eyebrow{display:inline-block;margin:0 0 12px;padding:4px 12px;border-radius:999px;background:rgba(31,186,0,.2);border:1px solid rgba(31,186,0,.6);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}.hero h1{color:#fff;font-size:42px;line-height:1.18;margin:0 0 14px;max-width:880px;letter-spacing:-.01em;}.lede{font-size:19px;line-height:1.6;color:rgba(255,255,255,.88);max-width:760px;margin:0 0 20px;}.meta{list-style:none;display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:0;font-size:14px;}.meta li{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:4px 12px;border-radius:999px;}.meta a{color:#fff;font-weight:700;text-decoration:none;}.layout{display:block;padding-top:32px;}.content{min-width:0;}.sidebar{margin-bottom:24px;}@media (min-width:1024px){.layout.has-toc{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:48px;align-items:start;}.layout.has-toc .sidebar{grid-column:2;grid-row:1;position:sticky;top:88px;margin:-64px 0 0;max-height:calc(100vh - 110px);overflow-y:auto;}.layout.has-toc .content{grid-column:1;grid-row:1;}}.layout:not(.has-toc) .content{max-width:820px;}.toc details{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);}.toc summary{cursor:pointer;font-weight:700;color:var(--heading);font-size:15px;letter-spacing:.04em;text-transform:uppercase;list-style:none;}.toc summary::-webkit-details-marker{display:none;}.toc summary::after{content:"▾";float:right;color:var(--muted);}.toc details:not([open]) summary::after{content:"▸";}.toc ol{margin:10px 0 0;padding:0;list-style:none;counter-reset:t;font-size:14.5px;line-height:1.45;}.toc li{counter-increment:t;}.toc a{display:flex;gap:10px;padding:7px 8px;border-radius:8px;color:var(--text);text-decoration:none;}.toc a::before{content:counter(t,decimal-leading-zero);color:var(--blue);font-weight:700;font-size:12.5px;padding-top:1px;}.toc a:hover{background:var(--soft);color:var(--heading);}h2{color:var(--heading);font-size:27px;line-height:1.3;margin:0 0 14px;letter-spacing:-.005em;}h3{font-size:19px;line-height:1.4;margin:22px 0 6px;}.content>section,.content>.topics{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px 30px;margin:0 0 24px;box-shadow:var(--shadow);}.content>section>h2::before{content:"";display:block;width:44px;height:4px;border-radius:4px;margin-bottom:14px;background:linear-gradient(90deg,var(--green),var(--blue));}.content p,.content li{max-width:72ch;}.content ul,.content ol{padding-left:22px;}.content li{margin:6px 0;}.content li::marker{color:var(--blue);font-weight:700;}dfn{font-style:normal;font-weight:700;color:var(--heading);}strong{color:inherit;}.tldr{position:relative;margin:-64px 0 24px;padding:24px 28px 18px;background:var(--surface);border-radius:var(--radius);box-shadow:0 16px 40px rgba(0,0,80,.16);border:1px solid var(--border);border-top:5px solid var(--green);}.tldr h2{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin:0 0 8px;}.tldr h2::before{content:"⚡ ";}.tldr ul{margin:0;padding-left:20px;}.tldr li{margin:8px 0;}.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}.card{display:flex;flex-direction:column;gap:6px;padding:18px 20px;text-decoration:none;color:var(--text);background:var(--soft);border:1px solid var(--border);border-radius:12px;transition:transform .15s,box-shadow .15s,border-color .15s;}.card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--blue);color:var(--text);}.card-kicker{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green);}.card strong{color:var(--heading);font-size:17px;line-height:1.35;}.card-desc{font-size:14.5px;line-height:1.5;color:var(--muted);flex:1;}.card-go{font-size:14px;font-weight:700;color:var(--link);margin-top:4px;}blockquote{position:relative;margin:20px 0;padding:20px 24px 16px 60px;background:var(--soft);border-radius:12px;border-left:4px solid var(--blue);}blockquote::before{content:"“";position:absolute;left:16px;top:-6px;font:700 64px/1 Georgia,serif;color:var(--blue);opacity:.5;}blockquote p{margin:0 0 8px;font-size:18px;font-style:italic;}blockquote footer{font-size:14px;color:var(--muted);}.table-wrap{overflow-x:auto;margin:18px 0;border:1px solid var(--border);border-radius:12px;-webkit-overflow-scrolling:touch;}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.5;min-width:560px;}caption{caption-side:top;text-align:left;font-weight:700;font-size:14px;padding:12px 16px;color:var(--muted);background:var(--soft);border-bottom:1px solid var(--border);}th,td{padding:11px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border);}thead th{background:var(--navy);color:#fff;font-size:14px;letter-spacing:.02em;}@media (prefers-color-scheme:dark){thead th{background:#1b2670;}}tbody tr:last-child>*{border-bottom:0;}tbody tr:nth-child(even) td{background:color-mix(in srgb,var(--soft) 55%,transparent);}tbody tr:hover td,tbody tr:hover th{background:var(--soft);}tbody th{color:var(--heading);font-weight:700;min-width:130px;}.defs{margin:0;}.defs dt{font-weight:700;margin-top:16px;color:var(--heading);}.defs dd{margin:4px 0 0;padding-left:14px;border-left:3px solid var(--border);}.glossary{display:grid;grid-template-columns:1fr;gap:0;}.note{font-size:14.5px;color:var(--muted);background:var(--soft);padding:10px 14px;border-radius:10px;}sup.cite{font-size:11px;line-height:0;margin-left:1px;}sup.cite a{text-decoration:none;font-weight:700;padding:1px 4px;border-radius:4px;background:var(--soft);}sup.cite a:hover{background:var(--blue);color:#fff;}pre{background:var(--code-bg);color:var(--code-text);padding:16px 18px;border-radius:12px;overflow-x:auto;font-size:14px;line-height:1.6;}code{font-family:Consolas,"SFMono-Regular",Menlo,monospace;}.diagram{margin:20px 0;padding:16px;background:var(--soft);border-radius:12px;}.diagram svg{width:100%;height:auto;display:block;}.d-box{fill:var(--surface);stroke:var(--blue);stroke-width:2;}.d-core{fill:var(--navy);stroke:var(--navy);}.d-text{fill:var(--text);}.d-text-core{fill:#fff;font-weight:700;}.d-arrow path{stroke:var(--green);stroke-width:3;fill:none;}figcaption{font-size:14px;color:var(--muted);margin-top:8px;}.faq .qa{border:1px solid var(--border);border-radius:12px;padding:14px 18px 4px 54px;margin:12px 0;position:relative;background:var(--bg);}.faq .qa::before{content:"?";position:absolute;left:14px;top:14px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#fff;background:var(--blue);}.faq .qa h3{margin:2px 0 6px;font-size:17.5px;color:var(--heading);}.faq .qa p{margin:0 0 10px;}.more{margin:14px 0 0;font-weight:700;}.more a{text-decoration:none;}.sources ol{font-size:14.5px;padding-left:26px;line-height:1.55;}.sources li{margin-bottom:8px;word-break:break-word;}.sources li:target{background:color-mix(in srgb,var(--green) 18%,transparent);border-radius:6px;}.to-top{text-align:right;font-size:14px;margin:8px 0 0;}.to-top a{text-decoration:none;}.site-footer{margin-top:48px;background:#000050;color:rgba(255,255,255,.78);font-size:14.5px;}.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px;padding-top:40px;padding-bottom:28px;}.site-footer .brand,.site-footer .brand:hover{color:#fff;}.site-footer h2{color:#fff;font-size:14px;letter-spacing:.08em;text-transform:uppercase;margin:4px 0 12px;}.site-footer ul{list-style:none;padding:0;margin:0;}.site-footer li{margin:6px 0;}.site-footer a{color:rgba(255,255,255,.85);text-decoration:none;}.site-footer a:hover{color:#fff;text-decoration:underline;}.footer-bottom{border-top:1px solid rgba(255,255,255,.12);padding-top:16px;padding-bottom:20px;font-size:13px;color:rgba(255,255,255,.6);}@media (max-width:800px){.header-inner{flex-wrap:wrap;gap:4px;padding-top:10px;padding-bottom:6px;min-height:0;}.main-nav{margin-left:-12px;width:calc(100% + 24px);padding:0 12px 4px;}html{scroll-padding-top:120px;}.footer-grid{grid-template-columns:1fr 1fr;}.footer-grid>div:first-child{grid-column:1 / -1;}}@media (max-width:600px){body{font-size:16px;}.hero{padding:20px 0 76px;}.hero h1{font-size:29px;}.lede{font-size:16.5px;}h2{font-size:22px;}.content>section,.content>.topics{padding:20px 18px;border-radius:12px;}.tldr{padding:18px 18px 12px;}.faq .qa{padding-left:48px;}.footer-grid{grid-template-columns:1fr;}}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.card,.main-nav a{transition:none;}.card:hover{transform:none;}}@media print{.site-header,.site-footer,.sidebar,.skip,.to-top{display:none;}.hero{background:none;color:#000;}.hero h1,.lede,.crumbs a,.meta a{color:#000;}.content>section{box-shadow:none;}}@media (max-width:1023px){.layout.has-toc .sidebar{position:relative;margin-top:-64px;}.layout.has-toc .tldr{margin-top:0;}}</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://example.com/#website",
+      "url": "https://example.com/",
+      "name": "Kho Dữ Liệu Việt",
+      "description": "Kiến thức Data Warehouse, Data Mart, Data Lakehouse bằng tiếng Việt",
+      "inLanguage": "vi",
+      "publisher": {
+        "@id": "https://example.com/gioi-thieu/#author"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://example.com/gioi-thieu/#author",
+      "name": "Nguyễn Anh Quân",
+      "jobTitle": "Sinh viên / Data Engineer",
+      "url": "https://example.com/gioi-thieu/",
+      "knowsAbout": [
+        "Data warehouse",
+        "Data modeling",
+        "ETL",
+        "Business intelligence"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://example.com/data-warehouse-vs-data-lake-vs-lakehouse/#webpage",
+      "url": "https://example.com/data-warehouse-vs-data-lake-vs-lakehouse/",
+      "name": "Data Warehouse vs Data Lake vs Lakehouse",
+      "description": "So sánh Data Warehouse, Data Lake và Data Lakehouse theo loại dữ liệu, schema, chi phí, người dùng và trường hợp sử dụng. Bảng so sánh và hướng dẫn chọn kiến trúc.",
+      "inLanguage": "vi",
+      "isPartOf": {
+        "@id": "https://example.com/#website"
+      },
+      "datePublished": "2026-09-24",
+      "dateModified": "2026-09-24",
+      "breadcrumb": {
+        "@id": "https://example.com/data-warehouse-vs-data-lake-vs-lakehouse/#breadcrumb"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Data warehouse",
+          "sameAs": "https://en.wikipedia.org/wiki/Data_warehouse",
+          "alternateName": "Kho dữ liệu"
+        },
+        {
+          "@type": "Thing",
+          "name": "Data lake",
+          "sameAs": "https://en.wikipedia.org/wiki/Data_lake",
+          "alternateName": "Hồ dữ liệu"
+        },
+        {
+          "@type": "Thing",
+          "name": "Data lakehouse",
+          "sameAs": "https://www.databricks.com/glossary/data-lakehouse"
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://example.com/data-warehouse-vs-data-lake-vs-lakehouse/#article",
+      "headline": "Data Warehouse, Data Lake và Data Lakehouse khác nhau thế nào?",
+      "description": "So sánh Data Warehouse, Data Lake và Data Lakehouse theo loại dữ liệu, schema, chi phí, người dùng và trường hợp sử dụng. Bảng so sánh và hướng dẫn chọn kiến trúc.",
+      "inLanguage": "vi",
+      "author": {
+        "@id": "https://example.com/gioi-thieu/#author"
+      },
+      "publisher": {
+        "@id": "https://example.com/gioi-thieu/#author"
+      },
+      "datePublished": "2026-09-24",
+      "dateModified": "2026-09-24",
+      "mainEntityOfPage": {
+        "@id": "https://example.com/data-warehouse-vs-data-lake-vs-lakehouse/#webpage"
+      },
+      "isPartOf": {
+        "@id": "https://example.com/#website"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Data warehouse",
+          "sameAs": "https://en.wikipedia.org/wiki/Data_warehouse",
+          "alternateName": "Kho dữ liệu"
+        },
+        {
+          "@type": "Thing",
+          "name": "Data lake",
+          "sameAs": "https://en.wikipedia.org/wiki/Data_lake",
+          "alternateName": "Hồ dữ liệu"
+        },
+        {
+          "@type": "Thing",
+          "name": "Data lakehouse",
+          "sameAs": "https://www.databricks.com/glossary/data-lakehouse"
+        }
+      ],
+      "mentions": [
+        {
+          "@type": "Thing",
+          "name": "Extract, transform, load",
+          "sameAs": "https://en.wikipedia.org/wiki/Extract,_transform,_load",
+          "alternateName": "ETL"
+        },
+        {
+          "@type": "Thing",
+          "name": "Extract, load, transform",
+          "sameAs": "https://en.wikipedia.org/wiki/Extract,_load,_transform",
+          "alternateName": "ELT"
+        },
+        {
+          "@type": "Thing",
+          "name": "Business intelligence",
+          "sameAs": "https://en.wikipedia.org/wiki/Business_intelligence",
+          "alternateName": "BI"
+        }
+      ],
+      "citation": [
+        {
+          "@type": "WebPage",
+          "name": "What is a Data Lake?",
+          "author": {
+            "@type": "Organization",
+            "name": "Amazon Web Services"
+          },
+          "url": "https://aws.amazon.com/what-is/data-lake/",
+          "publisher": {
+            "@type": "Organization",
+            "name": "AWS"
+          }
+        },
+        {
+          "@type": "WebPage",
+          "name": "What is a Data Lakehouse?",
+          "author": {
+            "@type": "Organization",
+            "name": "Databricks"
+          },
+          "url": "https://www.databricks.com/glossary/data-lakehouse",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Databricks"
+          }
+        },
+        {
+          "@type": "WebPage",
+          "name": "What is a Data Warehouse?",
+          "author": {
+            "@type": "Organization",
+            "name": "Amazon Web Services"
+          },
+          "url": "https://aws.amazon.com/what-is/data-warehouse/",
+          "publisher": {
+            "@type": "Organization",
+            "name": "AWS"
+          }
+        },
+        {
+          "@type": "WebPage",
+          "name": "Data lake",
+          "author": {
+            "@type": "Organization",
+            "name": "Wikipedia"
+          },
+          "url": "https://en.wikipedia.org/wiki/Data_lake",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Wikipedia"
+          }
+        },
+        {
+          "@type": "ScholarlyArticle",
+          "name": "Lakehouse: A New Generation of Open Platforms that Unify Data Warehousing and Advanced Analytics",
+          "author": {
+            "@type": "Person",
+            "name": "Armbrust, M., Ghodsi, A., Xin, R. & Zaharia, M."
+          },
+          "datePublished": "2021",
+          "url": "https://www.cidrdb.org/cidr2021/papers/cidr2021_paper17.pdf",
+          "publisher": {
+            "@type": "Organization",
+            "name": "CIDR 2021"
+          }
+        },
+        {
+          "@type": "WebPage",
+          "name": "What is Medallion Architecture?",
+          "author": {
+            "@type": "Organization",
+            "name": "Databricks"
+          },
+          "url": "https://www.databricks.com/glossary/medallion-architecture",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Databricks"
+          }
+        }
+      ],
+      "proficiencyLevel": "Beginner"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://example.com/data-warehouse-vs-data-lake-vs-lakehouse/#faq",
+      "isPartOf": {
+        "@id": "https://example.com/data-warehouse-vs-data-lake-vs-lakehouse/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Data Lake và Data Warehouse khác nhau ở điểm nào quan trọng nhất?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Khác biệt quan trọng nhất là thời điểm áp schema: Data Warehouse áp schema trước khi nạp (schema-on-write) và chỉ chứa dữ liệu có cấu trúc đã làm sạch; Data Lake lưu dữ liệu thô mọi định dạng và áp schema khi đọc (schema-on-read)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Lakehouse có thay thế hoàn toàn Data Warehouse không?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chưa có câu trả lời chung. Lakehouse giải quyết được nhiều hạn chế của kiến trúc hai tầng lake + warehouse, nhưng nhiều doanh nghiệp vẫn dùng data warehouse cloud cho BI vì đơn giản và quen thuộc. Lựa chọn phụ thuộc nhu cầu AI/ML, kỹ năng đội ngũ và chi phí."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Data swamp là gì?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Data swamp (đầm lầy dữ liệu) là data lake bị mất kiểm soát: thiếu metadata, thiếu quản trị và chất lượng, khiến người dùng không tìm được hoặc không tin dữ liệu bên trong."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Delta Lake, Apache Iceberg, Apache Hudi là gì?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Đây là các định dạng bảng mở (open table format) đặt trên file Parquet trong data lake, bổ sung giao dịch ACID, lịch sử phiên bản (time travel) và tiến hóa schema — nền tảng kỹ thuật của kiến trúc lakehouse."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://example.com/data-warehouse-vs-data-lake-vs-lakehouse/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Trang chủ",
+          "item": "https://example.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Data Warehouse, Data Lake và Data Lakehouse khác nhau thế nào?",
+          "item": "https://example.com/data-warehouse-vs-data-lake-vs-lakehouse/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#noi-dung">Bỏ qua tới nội dung</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><svg class="logo" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#000080"/><ellipse cx="16" cy="9" rx="9" ry="3.5" fill="#1fba00"/><path d="M7 9v14c0 1.9 4 3.5 9 3.5s9-1.6 9-3.5V9" fill="none" stroke="#fff" stroke-width="2"/><path d="M7 16c0 1.9 4 3.5 9 3.5s9-1.6 9-3.5" fill="none" stroke="#5cb3ff" stroke-width="2"/></svg><span>Kho Dữ Liệu <b>Việt</b></span></a>
+    <nav class="main-nav" aria-label="Điều hướng chính"><a href="/">DW là gì</a><a href="/data-warehouse-vs-data-lake-vs-lakehouse/" aria-current="page">DW vs Lake</a><a href="/kimball-vs-inmon/">Kimball vs Inmon</a><a href="/data-mart-la-gi/">Data Mart</a><a href="/etl-vs-elt/">ETL vs ELT</a><a href="/star-schema-snowflake-schema/">Star schema</a><a href="/faq/">FAQ</a><a href="/thuat-ngu/">Thuật ngữ</a></nav>
+  </div>
+</header>
+<main id="noi-dung">
+<article>
+  <header class="hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Trang chủ</a></li><li aria-current="page">Data Warehouse, Data Lake và Data Lakehouse khác nhau thế nào?</li></ol></nav>
+      <p class="eyebrow">Bài viết kiến thức</p>
+      <h1>Data Warehouse, Data Lake và Data Lakehouse khác nhau thế nào?</h1>
+      <p class="lede">So sánh Data Warehouse, Data Lake và Data Lakehouse theo loại dữ liệu, schema, chi phí, người dùng và trường hợp sử dụng. Bảng so sánh và hướng dẫn chọn kiến trúc.</p>
+      <ul class="meta">
+        <li>Tác giả: <a href="/gioi-thieu/" rel="author">Nguyễn Anh Quân</a></li>
+        <li>Cập nhật: <time datetime="2026-09-24">24/09/2026</time></li>
+        <li>4 phút đọc</li>
+        <li>6 nguồn tham khảo</li>
+      </ul>
+    </div>
+  </header>
+  <div class="wrap layout has-toc">
+    <aside class="sidebar"><nav class="toc" aria-label="Mục lục"><details open><summary>Mục lục</summary><ol><li><a href="#dinh-nghia">Định nghĩa ngắn gọn từng khái niệm</a></li><li><a href="#bang-so-sanh">Bảng so sánh Data Warehouse, Data Lake và Lakehouse</a></li><li><a href="#schema-on-write-read">Schema-on-write và schema-on-read là gì?</a></li><li><a href="#van-de-kien-truc-2-tang">Vì sao Lakehouse ra đời?</a></li><li><a href="#nen-chon">Nên chọn Data Warehouse, Data Lake hay Lakehouse?</a></li><li><a href="#cau-hoi-thuong-gap">Câu hỏi thường gặp</a></li><li><a href="#nguon-tham-khao">Nguồn tham khảo</a></li></ol></details></nav></aside>
+    <div class="content">
+      <aside class="tldr" aria-label="Trả lời nhanh">
+        <h2>Trả lời nhanh</h2>
+        <ul>
+          <li><strong>Data Warehouse</strong> lưu dữ liệu có cấu trúc, đã làm sạch, áp schema khi ghi (schema-on-write) — tối ưu cho BI và báo cáo.</li>
+      <li><strong>Data Lake</strong> lưu mọi loại dữ liệu (có cấu trúc, bán cấu trúc, phi cấu trúc) ở dạng thô, áp schema khi đọc (schema-on-read) <sup class="cite"><a href="#src-1" aria-label="Nguồn 1">[1]</a></sup>.</li>
+      <li><strong>Data Lakehouse</strong> kết hợp chi phí thấp và tính linh hoạt của data lake với giao dịch ACID và quản trị dữ liệu của data warehouse <sup class="cite"><a href="#src-2" aria-label="Nguồn 2">[2]</a></sup>.</li>
+      <li>Chọn DW khi nhu cầu chính là báo cáo có cấu trúc; chọn Lakehouse khi cần cả BI lẫn AI/ML trên cùng một nền tảng.</li>
+        </ul>
+      </aside>
+      
+      
+<section id="dinh-nghia">
+  <h2>Định nghĩa ngắn gọn từng khái niệm</h2>
+  <dl class="defs">
+    <dt>Data Warehouse (kho dữ liệu)</dt>
+    <dd>Kho lưu trữ tập trung dữ liệu đã tích hợp, có cấu trúc, phục vụ phân tích và ra quyết định <sup class="cite"><a href="#src-3" aria-label="Nguồn 3">[3]</a></sup>. Xem chi tiết: <a href="/">Data Warehouse là gì</a>.</dd>
+    <dt>Data Lake (hồ dữ liệu)</dt>
+    <dd>Kho tập trung cho phép lưu <q>mọi dữ liệu có cấu trúc và phi cấu trúc ở mọi quy mô</q> <sup class="cite"><a href="#src-1" aria-label="Nguồn 1">[1]</a></sup>. Thuật ngữ được James Dixon, CTO của Pentaho, đặt ra vào đầu thập niên 2010 <sup class="cite"><a href="#src-4" aria-label="Nguồn 4">[4]</a></sup>.</dd>
+    <dt>Data Lakehouse</dt>
+    <dd>Kiến trúc quản lý dữ liệu mở, kết hợp tính linh hoạt, hiệu quả chi phí và quy mô của data lake với khả năng quản lý dữ liệu và giao dịch ACID của data warehouse, cho phép chạy BI và ML trên toàn bộ dữ liệu <sup class="cite"><a href="#src-2" aria-label="Nguồn 2">[2]</a></sup>. Kiến trúc này được trình bày học thuật trong bài báo tại hội nghị CIDR 2021 <sup class="cite"><a href="#src-5" aria-label="Nguồn 5">[5]</a></sup>.</dd>
+  </dl>
+</section>
+
+<section id="bang-so-sanh">
+  <h2>Bảng so sánh Data Warehouse, Data Lake và Lakehouse</h2>
+  <div class="table-wrap">
+  <table>
+    <caption>So sánh 3 kiến trúc lưu trữ dữ liệu phân tích</caption>
+    <thead><tr><th scope="col">Tiêu chí</th><th scope="col">Data Warehouse</th><th scope="col">Data Lake</th><th scope="col">Data Lakehouse</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Loại dữ liệu</th><td>Có cấu trúc</td><td>Có cấu trúc, bán cấu trúc, phi cấu trúc</td><td>Tất cả các loại</td></tr>
+      <tr><th scope="row">Schema</th><td>Schema-on-write (định nghĩa trước khi nạp)</td><td>Schema-on-read (định nghĩa khi đọc)</td><td>Cả hai; có kiểm soát và tiến hóa schema</td></tr>
+      <tr><th scope="row">Định dạng lưu trữ</th><td>Định dạng riêng của engine</td><td>File mở (Parquet, JSON, CSV, ảnh, log…)</td><td>File mở + định dạng bảng mở (Delta Lake, Apache Iceberg, Apache Hudi)</td></tr>
+      <tr><th scope="row">Giao dịch ACID</th><td>Có</td><td>Thường không</td><td>Có (qua định dạng bảng mở)</td></tr>
+      <tr><th scope="row">Chất lượng dữ liệu</th><td>Cao, đã làm sạch</td><td>Thô, dễ thành “data swamp” nếu thiếu quản trị</td><td>Phân tầng Bronze → Silver → Gold <sup class="cite"><a href="#src-6" aria-label="Nguồn 6">[6]</a></sup></td></tr>
+      <tr><th scope="row">Người dùng chính</th><td>Nhà phân tích nghiệp vụ, BI</td><td>Data engineer, data scientist</td><td>Cả BI và data science</td></tr>
+      <tr><th scope="row">Trường hợp sử dụng</th><td>Báo cáo tài chính, dashboard KPI</td><td>Lưu log, dữ liệu IoT, huấn luyện ML</td><td>BI + ML + streaming trên một nền tảng</td></tr>
+      <tr><th scope="row">Ví dụ công nghệ</th><td>Amazon Redshift, Google BigQuery, Snowflake</td><td>Amazon S3, Azure Data Lake Storage, Google Cloud Storage</td><td>Databricks, Microsoft Fabric Lakehouse, bảng Iceberg trên các engine hỗ trợ</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">Ranh giới giữa các sản phẩm ngày càng mờ: nhiều data warehouse cloud đã đọc được định dạng bảng mở như Apache Iceberg, và nhiều lakehouse hỗ trợ SQL chuẩn kho dữ liệu.</p>
+</section>
+
+<section id="schema-on-write-read">
+  <h2>Schema-on-write và schema-on-read là gì?</h2>
+  <ul>
+    <li><strong>Schema-on-write:</strong> cấu trúc bảng (cột, kiểu dữ liệu) được định nghĩa <em>trước</em> khi nạp. Dữ liệu sai cấu trúc bị từ chối. Ưu điểm: dữ liệu nhất quán, truy vấn nhanh. Nhược điểm: kém linh hoạt khi nguồn thay đổi.</li>
+    <li><strong>Schema-on-read:</strong> dữ liệu được lưu nguyên dạng, cấu trúc chỉ được áp <em>khi đọc</em>. Ưu điểm: nạp nhanh, giữ được dữ liệu thô cho nhu cầu tương lai. Nhược điểm: mỗi người đọc có thể hiểu dữ liệu khác nhau.</li>
+  </ul>
+</section>
+
+<section id="van-de-kien-truc-2-tang">
+  <h2>Vì sao Lakehouse ra đời?</h2>
+  <p>Trước lakehouse, nhiều doanh nghiệp dùng kiến trúc 2 tầng: dữ liệu vào data lake trước, sau đó một phần được sao chép sang data warehouse để làm BI. Bài báo CIDR 2021 chỉ ra các vấn đề của mô hình này <sup class="cite"><a href="#src-5" aria-label="Nguồn 5">[5]</a></sup>:</p>
+  <ul>
+    <li><strong>Dữ liệu cũ (staleness):</strong> kho dữ liệu chậm hơn data lake do thêm bước sao chép.</li>
+    <li><strong>Độ tin cậy:</strong> giữ hai hệ thống đồng bộ khó và tốn công.</li>
+    <li><strong>Tổng chi phí sở hữu cao:</strong> trả tiền lưu trữ hai lần.</li>
+    <li><strong>Phụ thuộc nhà cung cấp:</strong> dữ liệu trong định dạng độc quyền của kho.</li>
+    <li><strong>Hỗ trợ hạn chế cho ML:</strong> công cụ ML khó đọc trực tiếp dữ liệu trong kho.</li>
+  </ul>
+</section>
+
+<section id="nen-chon">
+  <h2>Nên chọn Data Warehouse, Data Lake hay Lakehouse?</h2>
+  <div class="table-wrap">
+  <table>
+    <caption>Gợi ý lựa chọn theo tình huống</caption>
+    <thead><tr><th scope="col">Tình huống</th><th scope="col">Gợi ý</th></tr></thead>
+    <tbody>
+      <tr><td>Nhu cầu chủ yếu là báo cáo tài chính, KPI; dữ liệu từ ERP/CRM có cấu trúc</td><td>Data Warehouse</td></tr>
+      <tr><td>Cần lưu khối lượng lớn log, ảnh, dữ liệu cảm biến với chi phí thấp, chưa rõ mục đích phân tích</td><td>Data Lake (kèm quản trị dữ liệu)</td></tr>
+      <tr><td>Cần BI và AI/ML trên cùng dữ liệu, muốn tránh sao chép giữa hai hệ thống</td><td>Data Lakehouse</td></tr>
+      <tr><td>Đội ngũ nhỏ, chủ yếu biết SQL</td><td>Data Warehouse cloud (serverless)</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+      <section id="cau-hoi-thuong-gap" class="faq">
+  <h2>Câu hỏi thường gặp</h2>
+  <div class="qa"><h3>Data Lake và Data Warehouse khác nhau ở điểm nào quan trọng nhất?</h3><p>Khác biệt quan trọng nhất là thời điểm áp schema: Data Warehouse áp schema trước khi nạp (schema-on-write) và chỉ chứa dữ liệu có cấu trúc đã làm sạch; Data Lake lưu dữ liệu thô mọi định dạng và áp schema khi đọc (schema-on-read).</p></div>
+  <div class="qa"><h3>Lakehouse có thay thế hoàn toàn Data Warehouse không?</h3><p>Chưa có câu trả lời chung. Lakehouse giải quyết được nhiều hạn chế của kiến trúc hai tầng lake + warehouse, nhưng nhiều doanh nghiệp vẫn dùng data warehouse cloud cho BI vì đơn giản và quen thuộc. Lựa chọn phụ thuộc nhu cầu AI/ML, kỹ năng đội ngũ và chi phí.</p></div>
+  <div class="qa"><h3>Data swamp là gì?</h3><p>Data swamp (đầm lầy dữ liệu) là data lake bị mất kiểm soát: thiếu metadata, thiếu quản trị và chất lượng, khiến người dùng không tìm được hoặc không tin dữ liệu bên trong.</p></div>
+  <div class="qa"><h3>Delta Lake, Apache Iceberg, Apache Hudi là gì?</h3><p>Đây là các định dạng bảng mở (open table format) đặt trên file Parquet trong data lake, bổ sung giao dịch ACID, lịch sử phiên bản (time travel) và tiến hóa schema — nền tảng kỹ thuật của kiến trúc lakehouse.</p></div>
+</section>
+      <section class="related" id="bai-lien-quan"><h2>Bài liên quan</h2><div class="cards"><a class="card" href="/"><span class="card-kicker">DW là gì</span><strong>Data Warehouse là gì? Định nghĩa, kiến trúc và cách hoạt động</strong><span class="card-desc">Data Warehouse (kho dữ liệu) là hệ thống lưu trữ tập trung dữ liệu đã tích hợp từ nhiều nguồn để phân tích và báo cáo.</span><span class="card-go" aria-hidden="true">Đọc bài →</span></a><a class="card" href="/etl-vs-elt/"><span class="card-kicker">ETL vs ELT</span><strong>ETL và ELT khác nhau thế nào?</strong><span class="card-desc">ETL biến đổi dữ liệu trước khi nạp vào kho; ELT nạp trước rồi biến đổi ngay trong kho dữ liệu.</span><span class="card-go" aria-hidden="true">Đọc bài →</span></a><a class="card" href="/data-mart-la-gi/"><span class="card-kicker">Data Mart</span><strong>Data Mart là gì? Phân loại và so sánh với Data Warehouse</strong><span class="card-desc">Data Mart là tập con của kho dữ liệu, tập trung vào một chủ đề hoặc phòng ban.</span><span class="card-go" aria-hidden="true">Đọc bài →</span></a><a class="card" href="/thuat-ngu/"><span class="card-kicker">Thuật ngữ</span><strong>Thuật ngữ Data Warehouse (Anh – Việt)</strong><span class="card-desc">Từ điển thuật ngữ Data Warehouse Anh – Việt: OLAP, OLTP, ETL, ELT, fact, dimension, grain, star schema, SCD, Data Vault, lakehouse, medallion.</span><span class="card-go" aria-hidden="true">Đọc bài →</span></a></div></section>
+      <section id="nguon-tham-khao" class="sources">
+  <h2>Nguồn tham khảo</h2>
+  <ol>
+    <li id="src-1">Amazon Web Services. “What is a Data Lake?”. AWS. <a href="https://aws.amazon.com/what-is/data-lake/" rel="noopener" target="_blank">aws.amazon.com</a></li>
+    <li id="src-2">Databricks. “What is a Data Lakehouse?”. Databricks. <a href="https://www.databricks.com/glossary/data-lakehouse" rel="noopener" target="_blank">www.databricks.com</a></li>
+    <li id="src-3">Amazon Web Services. “What is a Data Warehouse?”. AWS. <a href="https://aws.amazon.com/what-is/data-warehouse/" rel="noopener" target="_blank">aws.amazon.com</a></li>
+    <li id="src-4">Wikipedia. “Data lake”. Wikipedia. <a href="https://en.wikipedia.org/wiki/Data_lake" rel="noopener" target="_blank">en.wikipedia.org</a></li>
+    <li id="src-5">Armbrust, M., Ghodsi, A., Xin, R. &amp; Zaharia, M. (2021). “Lakehouse: A New Generation of Open Platforms that Unify Data Warehousing and Advanced Analytics”. CIDR 2021. <a href="https://www.cidrdb.org/cidr2021/papers/cidr2021_paper17.pdf" rel="noopener" target="_blank">www.cidrdb.org</a></li>
+    <li id="src-6">Databricks. “What is Medallion Architecture?”. Databricks. <a href="https://www.databricks.com/glossary/medallion-architecture" rel="noopener" target="_blank">www.databricks.com</a></li>
+  </ol>
+</section>
+      <p class="to-top"><a href="#noi-dung">↑ Lên đầu trang</a></p>
+    </div>
+  </div>
+</article>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <a class="brand" href="/"><svg class="logo" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#000080"/><ellipse cx="16" cy="9" rx="9" ry="3.5" fill="#1fba00"/><path d="M7 9v14c0 1.9 4 3.5 9 3.5s9-1.6 9-3.5V9" fill="none" stroke="#fff" stroke-width="2"/><path d="M7 16c0 1.9 4 3.5 9 3.5s9-1.6 9-3.5" fill="none" stroke="#5cb3ff" stroke-width="2"/></svg><span>Kho Dữ Liệu <b>Việt</b></span></a>
+      <p>Kiến thức Data Warehouse, Data Mart, Data Lakehouse bằng tiếng Việt. Nội dung trung lập, mọi khẳng định kỹ thuật đều có dẫn nguồn.</p>
+    </div>
+    <div>
+      <h2>Chủ đề</h2>
+      <ul><li><a href="/">DW là gì</a></li><li><a href="/data-warehouse-vs-data-lake-vs-lakehouse/">DW vs Lake</a></li><li><a href="/kimball-vs-inmon/">Kimball vs Inmon</a></li><li><a href="/data-mart-la-gi/">Data Mart</a></li><li><a href="/etl-vs-elt/">ETL vs ELT</a></li><li><a href="/star-schema-snowflake-schema/">Star schema</a></li></ul>
+    </div>
+    <div>
+      <h2>Tài nguyên</h2>
+      <ul><li><a href="/faq/">Câu hỏi thường gặp</a></li><li><a href="/thuat-ngu/">Thuật ngữ</a></li><li><a href="/gioi-thieu/">Giới thiệu &amp; chính sách biên tập</a></li><li><a href="/sitemap.xml">Sitemap</a></li><li><a href="/llms.txt">llms.txt</a></li></ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">© 2026 Nguyễn Anh Quân · Cập nhật 24/09/2026</div>
+</footer>
+</body>
+</html>
